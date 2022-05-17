@@ -31,18 +31,19 @@ router.post('/login',(req, res)=> {
   })
 });
 
-router.get('/refresh',(req,res)=>{
+router.post('/refresh',(req,res)=>{
   const refresh = req.body.refresh_token;
+  
   const config = {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Basic ' + (new Buffer(process.env.SPOTIFY_CLIENT_ID + ':' + process.env.SPOTIFY_CLIENT_ID).toString('base64'))
     }
   }
-  const params = new URLSearchParams()
-  params.append('grant_type', 'refresh_token')
-  params.append('refresh_token',refresh)
-  axios('https://accounts.spotify.com/api/token',params,config).then((data)=>{
+  const data = new URLSearchParams()
+  data.append('grant_type', 'refresh_token')
+  data.append('refresh_token',refresh)
+  axios('https://accounts.spotify.com/api/token',data,config).then((data)=>{
     res.status(200).json({
       access_token:data.body.access_token,
       refresh_token:data.body.refresh_token,

@@ -3,6 +3,7 @@ const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const app = express();
+const cors = require("cors")
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -12,7 +13,7 @@ const io = new Server(httpServer, {
     }
 });
 app.use(express.json())
-
+app.use(cors())
 
 const {onConnection} = require("./controlleur/onConnection")(io);
 const {onScan} = require("./controlleur/onScan")(io);

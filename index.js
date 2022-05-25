@@ -15,12 +15,10 @@ const io = new Server(httpServer, {
 app.use(express.json())
 app.use(cors())
 
-const {onConnection} = require("./controlleur/onConnection")(io);
-const {onScan} = require("./controlleur/onScan")(io);
+const {QRCODE} = require("./controlleur/QRCODE")(io);
 
 const connection = (socket) => {
-  socket.on("onConnection",onConnection);
-  socket.on("onScan", onScan);
+  socket.on("QRCODE", QRCODE);
 }
 
 io.on("connection", connection);

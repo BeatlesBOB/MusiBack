@@ -1,9 +1,9 @@
 module.exports = (io) => {
-    const onConnection = function (msg) {
+    const QRCODE = function (data) {
         const socket = this; // hence the 'function' above, as an arrow function will not work
-        socket.emit("onConnection",msg)
+        socket.broadcast.emit("QRCODE",data);
     };
     return {
-        onConnection,
+        QRCODE,
     }
   }

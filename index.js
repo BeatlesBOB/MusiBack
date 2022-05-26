@@ -23,7 +23,6 @@ const connection = (socket) => {
 
 io.on("connection", connection);
 app.use("/auth",require('./routes/auth'))
-app.use("/search",require('./routes/search'))
 
 
 const PORT = process.env.PORT || 3000

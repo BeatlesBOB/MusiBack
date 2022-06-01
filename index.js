@@ -6,14 +6,14 @@ const app = express();
 const cors = require("cors")
 
 const httpServer = createServer(app);
+app.use(express.json())
+app.use(cors())
 const io = new Server(httpServer, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
     }
 });
-app.use(express.json())
-app.use(cors())
 
 const {QRCODE} = require("./controlleur/QRCODE")(io);
 
